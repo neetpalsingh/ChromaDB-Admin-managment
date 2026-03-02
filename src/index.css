@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom utility classes for font size control */
+@layer utilities {
+  .text-compact {
+    font-size: 0.8125rem !important; /* 13px at 100% scale, 9.75px at 75% scale */
+    line-height: 1.3 !important;
+  }
+
+  .text-extra-compact {
+    font-size: 0.75rem !important; /* 12px at 100% scale, 9px at 75% scale */
+    line-height: 1.2 !important;
+  }
+
+  .text-micro {
+    font-size: 0.6875rem !important; /* 11px at 100% scale, 8.25px at 75% scale */
+    line-height: 1.1 !important;
+  }
+
+  /* Spacing utilities for compact layouts */
+  .space-compact > * + * {
+    margin-top: 0.375rem !important;
+  }
+
+  .space-extra-compact > * + * {
+    margin-top: 0.25rem !important;
+  }
+
+  /* Padding utilities for compact components */
+  .p-compact {
+    padding: 0.375rem !important;
+  }
+
+  .px-compact {
+    padding-left: 0.375rem !important;
+    padding-right: 0.375rem !important;
+  }
+
+  .py-compact {
+    padding-top: 0.375rem !important;
+    padding-bottom: 0.375rem !important;
+  }
+
+  /* Icon size utilities */
+  .icon-compact {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  .icon-extra-compact {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+  }
+}
+
+@layer base {
+  /* Global font size reduction to 75% for better readability */
+  html {
+    font-size: 75%; /* Reduces base font size from 16px to 12px */
+  }
+
+  body {
+    background-color: rgb(249 250 251);
+    color: rgb(17 24 39);
+    font-size: 1rem; /* Will be 12px instead of 16px */
+  }
+
+  .dark body {
+    background-color: rgb(17 24 39);
+    color: rgb(243 244 246);
+  }
+
+  /* Ensure all text elements scale proportionally */
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+  }
+
+  /* Adjust input and button text sizes */
+  input, button, select, textarea {
+    font-size: inherit;
+  }
+
+  /* Ensure icons scale with text */
+  svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    background-color: rgb(37 99 235);
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  }
+  
+  .btn-primary:hover {
+    background-color: rgb(29 78 216);
+  }
+  
+  .btn-secondary {
+    background-color: rgb(229 231 235);
+    color: rgb(31 41 55);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  }
+  
+  .btn-secondary:hover {
+    background-color: rgb(209 213 219);
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    border: 1px solid rgb(229 231 235);
+    padding: 1.5rem;
+  }
+
+  .dark .card {
+    background-color: rgb(31 41 55);
+    border-color: rgb(75 85 99);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgb(209 213 219);
+    border-radius: 0.5rem;
+    outline: none;
+    background-color: white;
+    color: rgb(17 24 39);
+  }
+
+  .input-field:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 2px rgb(59 130 246);
+  }
+
+  .dark .input-field {
+    background-color: rgb(31 41 55);
+    border-color: rgb(75 85 99);
+    color: rgb(243 244 246);
+  }
+
+  .dark .input-field:focus {
+    box-shadow: 0 0 0 2px rgb(96 165 250);
+  }
+
+  /* Compact table styles for smaller font size */
+  .table-compact {
+    font-size: 0.875rem; /* Even smaller for tables */
+  }
+
+  .table-compact th,
+  .table-compact td {
+    padding: 0.375rem 0.5rem; /* Reduced padding */
+  }
+
+  /* Compact form styles */
+  .form-compact .input-field {
+    padding: 0.375rem 0.5rem; /* Smaller input padding */
+    font-size: 0.875rem;
+  }
+
+  .form-compact .btn-primary,
+  .form-compact .btn-secondary {
+    padding: 0.375rem 0.75rem; /* Smaller button padding */
+    font-size: 0.875rem;
+  }
+
+  /* Compact card styles */
+  .card-compact {
+    padding: 1rem; /* Reduced from 1.5rem */
+  }
+
+  /* Navigation and header adjustments */
+  .nav-compact {
+    font-size: 0.875rem;
+  }
+
+  .nav-compact .nav-link {
+    padding: 0.375rem 0.75rem;
+  }
+
+  /* Modal and dialog adjustments */
+  .modal-compact .modal-content {
+    font-size: 0.875rem;
+  }
+
+  /* Code and pre-formatted text */
+  code, pre {
+    font-size: 0.8125rem; /* Slightly smaller for code */
+  }
+
+  /* Ensure proper line heights for readability */
+  p, div, span {
+    line-height: 1.4; /* Slightly tighter line height */
+  }
+
+  /* Responsive adjustments for very small screens */
+  @media (max-width: 640px) {
+    html {
+      font-size: 70%; /* Even smaller on mobile */
+    }
+  }
+
+  @media (max-width: 480px) {
+    html {
+      font-size: 65%; /* Smallest on very small screens */
+    }
+  }
+}
