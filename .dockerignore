@@ -1,0 +1,63 @@
+# Node modules
+node_modules
+npm-debug.log
+
+# Environment files (will be created from .env.example)
+.env
+.env.local
+.env.production
+.env.development
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation (not needed in container)
+*.md
+!README.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts (will be rebuilt)
+build/
+dist/
+dist-ssr/
+
+# Test files
+test/
+tests/
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Scripts not needed in production
+setup-github-repo.ps1
+verify-commits.ps1
+deploy-https-fix.sh
+
+# Logs
+logs
+*.log
+
+# PDF files
+*.pdf
+
+# Misc
+chromadb/
+simple-demo.html
+debug-api.js
