@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chromadb-admin"
+version = "1.0.0"
+description = "ChromaDB Admin Management System - A web-based admin dashboard for ChromaDB"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+keywords = ["chromadb", "vector-database", "admin", "dashboard", "management", "embeddings", "ai", "ml"]
+authors = [
+    {name = "Neetpal Singh", email = "neetpalsingh750@gmail.com"}
+]
+maintainers = [
+    {name = "Neetpal Singh", email = "neetpalsingh750@gmail.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Database :: Database Engines/Servers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "chromadb>=0.4.0",
+    "fastapi>=0.100.0",
+    "uvicorn[standard]>=0.23.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/neetpalsingh/ChromaDB-Admin-managment"
+Documentation = "https://github.com/neetpalsingh/ChromaDB-Admin-managment#readme"
+Repository = "https://github.com/neetpalsingh/ChromaDB-Admin-managment"
+"Bug Reports" = "https://github.com/neetpalsingh/ChromaDB-Admin-managment/issues"
+
+[project.scripts]
+chromadb-admin = "chromadb_admin.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
