@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector Database API UI - Simple Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border: 1px solid rgb(229 231 235);
+            padding: 1.5rem;
+        }
+        
+        .btn-primary {
+            background-color: rgb(37 99 235);
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary:hover {
+            background-color: rgb(29 78 216);
+        }
+        
+        .btn-secondary {
+            background-color: rgb(229 231 235);
+            color: rgb(31 41 55);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgb(209 213 219);
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid rgb(209 213 219);
+            border-radius: 0.5rem;
+            outline: none;
+        }
+        
+        .input-field:focus {
+            border-color: transparent;
+            box-shadow: 0 0 0 2px rgb(59 130 246);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8">Vector Database API UI - Simple Demo</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dashboard Card -->
+            <div class="card">
+                <h2 class="text-xl font-semibold mb-4">Dashboard</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span>Total Tenants:</span>
+                        <span class="font-bold text-blue-600">3</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Total Databases:</span>
+                        <span class="font-bold text-green-600">5</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Total Collections:</span>
+                        <span class="font-bold text-purple-600">12</span>
+                    </div>
+                </div>
+                <button class="btn-primary w-full mt-4">View Dashboard</button>
+            </div>
+            
+            <!-- Tenants Card -->
+            <div class="card">
+                <h2 class="text-xl font-semibold mb-4">Tenant Management</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span>Active Tenants:</span>
+                        <span class="font-bold text-green-600">3</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Created Today:</span>
+                        <span class="font-bold text-blue-600">1</span>
+                    </div>
+                </div>
+                <button class="btn-secondary w-full mt-4">Manage Tenants</button>
+            </div>
+            
+            <!-- Data Operations Card -->
+            <div class="card">
+                <h2 class="text-xl font-semibold mb-4">Data Operations</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span>Total Records:</span>
+                        <span class="font-bold text-purple-600">1,250</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Collections:</span>
+                        <span class="font-bold text-blue-600">12</span>
+                    </div>
+                </div>
+                <button class="btn-secondary w-full mt-4">Manage Data</button>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="card mt-8">
+            <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button class="btn-primary">Create Tenant</button>
+                <button class="btn-secondary">Add Database</button>
+                <button class="btn-secondary">New Collection</button>
+            </div>
+        </div>
+        
+        <!-- Test Form -->
+        <div class="card mt-8">
+            <h2 class="text-xl font-semibold mb-4">Test Form</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Tenant Name</label>
+                    <input type="text" class="input-field" placeholder="Enter tenant name">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Description</label>
+                    <textarea class="input-field" rows="3" placeholder="Enter description"></textarea>
+                </div>
+                <button class="btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

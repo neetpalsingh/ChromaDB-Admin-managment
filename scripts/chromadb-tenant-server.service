@@ -1,0 +1,26 @@
+[Unit]
+Description=ChromaDB Dashboard - Tenant Data Server
+After=network.target
+
+[Service]
+Type=simple
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/home/ec2-user/api-ui
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node server/tenantDataServer.cjs
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=chromadb-tenant-server
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/home/ec2-user/api-ui
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,28 @@
+[Unit]
+Description=ChromaDB Dashboard - Vite Server
+After=network.target
+Wants=chromadb-tenant-server.service
+
+[Service]
+Type=simple
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/home/ec2-user/api-ui
+Environment=NODE_ENV=production
+Environment=CHROMA_URL=https://croma-db.ascentbusiness.com
+ExecStart=/usr/bin/npm run preview -- --port 3002 --host 0.0.0.0
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=chromadb-dashboard
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/home/ec2-user/api-ui
+
+[Install]
+WantedBy=multi-user.target
