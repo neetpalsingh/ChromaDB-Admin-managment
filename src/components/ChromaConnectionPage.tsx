@@ -15,6 +15,7 @@ interface ConnectionConfig {
   token?: string;
   username?: string;
   password?: string;
+  tokenHeader?: 'Authorization' | 'X-Chroma-Token'; // Which header to use for token auth
 }
 
 interface ChromaConnectionPageProps {
@@ -22,12 +23,13 @@ interface ChromaConnectionPageProps {
 }
 
 const ChromaConnectionPage: React.FC<ChromaConnectionPageProps> = ({ onConnectionSuccess }) => {
-  const defaultChromaURL = import.meta.env.VITE_CHROMADB_URL || 'http://localhost:8000';
+  const defaultChromaURL = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CHROMADB_URL) || 'http://localhost:8000';
   const [config, setConfig] = useState<ConnectionConfig>({
     connectionString: defaultChromaURL,
     tenant: 'default_tenant',
     database: 'default_database',
-    authType: 'none'
+    authType: 'none',
+    tokenHeader: 'Authorization' // Default to Authorization: Bearer
   });
   
   const [isConnecting, setIsConnecting] = useState(false);
@@ -299,23 +301,47 @@ const ChromaConnectionPage: React.FC<ChromaConnectionPageProps> = ({ onConnectio
                   </div>
 
                   {config.authType === 'token' && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Token <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="password"
-                        value={config.token || ''}
-                        onChange={(e) => handleInputChange('token', e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
-                          config.token?.trim() ? 'border-gray-300' : 'border-red-300 bg-red-50'
-                        }`}
-                        placeholder="Enter your authentication token"
-                        required
-                      />
-                      {!config.token?.trim() && (
-                        <p className="mt-1 text-xs text-red-600">Token is required for authentication</p>
-                      )}
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Token <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="password"
+                          value={config.token || ''}
+                          onChange={(e) => handleInputChange('token', e.target.value)}
+                          className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                            config.token?.trim() ? 'border-gray-300' : 'border-red-300 bg-red-50'
+                          }`}
+                          placeholder="Enter your authentication token"
+                          required
+                        />
+                        {!config.token?.trim() && (
+                          <p className="mt-1 text-xs text-red-600">Token is required for authentication</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Token Header Type
+                        </label>
+                        <p className="text-xs text-gray-500 mb-2">
+                          Choose how to send the token to ChromaDB. Most instances use "Authorization: Bearer".
+                        </p>
+                        <select
+                          value={config.tokenHeader || 'Authorization'}
+                          onChange={(e) => handleInputChange('tokenHeader', e.target.value as 'Authorization' | 'X-Chroma-Token')}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        >
+                          <option value="Authorization">Authorization: Bearer (Default)</option>
+                          <option value="X-Chroma-Token">X-Chroma-Token</option>
+                        </select>
+                        <p className="mt-1 text-xs text-gray-500">
+                          {config.tokenHeader === 'X-Chroma-Token'
+                            ? 'Will use: X-Chroma-Token: <your-token>'
+                            : 'Will use: Authorization: Bearer <your-token>'}
+                        </p>
+                      </div>
                     </div>
                   )}
 

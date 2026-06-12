@@ -92,7 +92,7 @@ function Endpoints() {
 
 // Settings component
 function Settings({ onDisconnect }: { onDisconnect: () => void }) {
-  const defaultChromaURL = import.meta.env.VITE_CHROMADB_URL || 'http://localhost:8000';
+  const defaultChromaURL = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CHROMADB_URL) || 'http://localhost:8000';
   const [baseURL, setBaseURL] = useState(defaultChromaURL);
   const [apiKey, setApiKey] = useState('');
   const [autoSave, setAutoSave] = useState(true);
