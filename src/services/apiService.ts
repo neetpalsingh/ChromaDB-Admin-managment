@@ -1,32 +1,29 @@
 import axios from 'axios';
 import type { AxiosInstance } from 'axios';
-import type { 
-  Tenant, 
-  Database, 
-  Collection, 
-  Record, 
-  QueryRequest, 
+import type {
+  Tenant,
+  Database,
+  Collection,
+  Record,
+  QueryRequest,
   GetRequest,
-  AddRequest, 
-  UpdateRequest, 
+  AddRequest,
+  UpdateRequest,
   DeleteRequest,
   APIResponse,
   UserIdentity
 } from '../types/api';
-
-interface ConnectionConfig {
-  connectionString: string;
-  tenant: string;
-  database: string;
-  authType: 'none' | 'token' | 'basic';
-  token?: string;
-  username?: string;
-  password?: string;
-}
+import {
+  getConnectionConfig,
+  saveConnectionConfig,
+  clearConnectionConfig,
+  getAuthHeaders,
+  type ConnectionConfig
+} from '../utils/cookieStorage';
 
 class APIService {
   private api: AxiosInstance;
-  private baseURL: string = import.meta.env.VITE_CHROMADB_URL || 'http://localhost:8000'; // Default from env, can be changed in settings
+  private baseURL: string = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CHROMADB_URL) || 'http://localhost:8000'; // Default from env, can be changed in settings
   private apiKey: string = '';
   private connectionConfig: ConnectionConfig | null = null;
 
@@ -51,7 +48,7 @@ class APIService {
 
     this.api = axios.create({
       baseURL,
-      timeout: 30000,
+      timeout: 300000, // 5 minutes timeout for large operations (get, query, etc.)
       headers: {
         'Content-Type': 'application/json',
       },
@@ -59,9 +56,19 @@ class APIService {
 
     // Add request interceptor for authentication
     this.api.interceptors.request.use((config) => {
-      if (this.apiKey) {
-        config.headers.Authorization = `Bearer ${this.apiKey}`;
+      // Get fresh connection config from cookies for each request
+      const currentConfig = getConnectionConfig();
+
+      if (currentConfig) {
+        // Get authentication headers based on auth type
+        const authHeaders = getAuthHeaders(currentConfig);
+
+        // Apply auth headers
+        Object.entries(authHeaders).forEach(([key, value]) => {
+          config.headers.set(key, value);
+        });
       }
+
       return config;
     });
 
@@ -78,12 +85,12 @@ class APIService {
     this.loadConnectionConfig();
   }
 
-  // Load connection configuration from localStorage
+  // Load connection configuration from cookies
   private loadConnectionConfig() {
     try {
-      const savedConfig = localStorage.getItem('chroma_connection_config');
+      const savedConfig = getConnectionConfig();
       if (savedConfig) {
-        this.connectionConfig = JSON.parse(savedConfig);
+        this.connectionConfig = savedConfig;
         this.updateApiConfiguration();
       }
     } catch (error) {
@@ -156,9 +163,9 @@ class APIService {
     console.log('Setting connection config:', config);
     this.connectionConfig = config;
     this.updateApiConfiguration();
-    
-    // Save to localStorage
-    localStorage.setItem('chroma_connection_config', JSON.stringify(config));
+
+    // Save to cookies (secure storage)
+    saveConnectionConfig(config);
   }
 
   // Get current connection configuration
@@ -169,6 +176,13 @@ class APIService {
   // Check if connected to ChromaDB
   isConnected(): boolean {
     return this.connectionConfig !== null;
+  }
+
+  // Disconnect and clear connection configuration
+  disconnect() {
+    this.connectionConfig = null;
+    clearConnectionConfig();
+    console.log('🔌 Disconnected from ChromaDB');
   }
 
   // Helper method to validate API response
@@ -560,6 +574,15 @@ class APIService {
       return { success: true, data: response.data };
     } catch (error: any) {
       console.error(`Error getting records for ${tenant}/${database}/${collectionId}:`, error);
+
+      // Check if it's a timeout error
+      if (error.code === 'ECONNABORTED' || error.response?.status === 408) {
+        return {
+          success: false,
+          error: 'Request timeout. The collection is too large to fetch all at once. Try using pagination with limit/offset, or use Query instead of Get for large collections.'
+        };
+      }
+
       return { success: false, error: error.response?.data?.message || error.message };
     }
   }
