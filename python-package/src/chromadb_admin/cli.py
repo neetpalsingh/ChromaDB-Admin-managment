@@ -14,15 +14,15 @@ from .server import start_server
 BANNER = """
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║   ██████╗██╗  ██╗██████╗  ██████╗ ██████╗ ███╗   ███╗   ║
-║  ██╔════╝██║  ██║██╔══██╗██╔═══██╗██╔══██╗████╗ ████║   ║
-║  ██║     ███████║██████╔╝██║   ██║██║  ██║██╔████╔██║   ║
-║  ██║     ██╔══██║██╔══██╗██║   ██║██║  ██║██║╚██╔╝██║   ║
-║  ╚██████╗██║  ██║██║  ██║╚██████╔╝██████╔╝██║ ╚═╝ ██║   ║
-║   ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝   ║
+║   ██████╗██╗  ██╗██████╗  ██████╗ ███╗   ███╗ █████╗      ║
+║  ██╔════╝██║  ██║██╔══██╗██╔═══██╗████╗ ████║██╔══██╗     ║
+║  ██║     ███████║██████╔╝██║   ██║██╔████╔██║███████║     ║
+║  ██║     ██╔══██║██╔══██╗██║   ██║██║╚██╔╝██║██╔══██║     ║
+║  ╚██████╗██║  ██║██║  ██║╚██████╔╝██║ ╚═╝ ██║██║  ██║     ║
+║   ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝     ║
 ║                                                           ║
-║       Admin Management System for ChromaDB               ║
-║                    Version 1.0.0                         ║
+║       Admin Management System for ChromaDB                ║
+║                    Version 1.0.6                          ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
 """
@@ -80,14 +80,19 @@ Environment Variables:
     parser.add_argument(
         '--version',
         action='version',
-        version='ChromaDB Admin v1.0.0'
+        version='ChromaDB Admin v1.0.6'
     )
     
     args = parser.parse_args()
-    
+
     print(f"🚀 Starting ChromaDB Admin Dashboard...")
-    print(f"📡 ChromaDB URL: {args.chromadb_url}")
-    print(f"🌐 Server: http://{args.host}:{args.port}")
+    print(f"📡 Default ChromaDB URL: {args.chromadb_url}")
+
+    # Show appropriate server URL
+    if args.host == '0.0.0.0':
+        print(f"🌐 Server: http://localhost:{args.port}")
+    else:
+        print(f"🌐 Server: http://{args.host}:{args.port}")
     print(f"")
     
     try:
