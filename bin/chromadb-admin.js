@@ -13,41 +13,56 @@ const fs = require('fs');
 console.log(`
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║    ██████╗██╗  ██╗██████╗  ██████╗ ███╗   ███╗ █████╗     ║
-║   ██╔════╝██║  ██║██╔══██╗██╔═══██╗████╗ ████║██╔══██╗    ║
-║   ██║     ███████║██████╔╝██║   ██║██╔████╔██║███████║    ║
-║   ██║     ██╔══██║██╔══██╗██║   ██║██║╚██╔╝██║██╔══██║    ║
-║   ╚██████╗██║  ██║██║  ██║╚██████╔╝██║ ╚═╝ ██║██║  ██║    ║
-║    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝    ║
+║   ██████╗██╗  ██╗██████╗  ██████╗ ███╗   ███╗ █████╗      ║
+║  ██╔════╝██║  ██║██╔══██╗██╔═══██╗████╗ ████║██╔══██╗     ║
+║  ██║     ███████║██████╔╝██║   ██║██╔████╔██║███████║     ║
+║  ██║     ██╔══██║██╔══██╗██║   ██║██║╚██╔╝██║██╔══██║     ║
+║  ╚██████╗██║  ██║██║  ██║╚██████╔╝██║ ╚═╝ ██║██║  ██║     ║
+║   ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝     ║
 ║                                                           ║
 ║       Admin Management System for ChromaDB                ║
-║                    Version 1.0.0                          ║
+║                    Version 1.0.7                          ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
 `);
 
 const args = process.argv.slice(2);
-const command = args[0] || 'start';
 
 // Parse command-line arguments
 function parseArgs(argv) {
-  const parsed = {};
+  const parsed = { command: 'start' };
+
   for (let i = 0; i < argv.length; i++) {
-    if (argv[i] === '--port' && argv[i + 1]) {
+    const arg = argv[i];
+
+    // Check if it's a command (no -- prefix)
+    if (!arg.startsWith('--') && !parsed.commandFound) {
+      // Check if it's a valid command
+      if (['start', 'dev', 'build', 'help', 'version'].includes(arg)) {
+        parsed.command = arg;
+        parsed.commandFound = true;
+        continue;
+      }
+    }
+
+    // Parse options
+    if (arg === '--port' && argv[i + 1]) {
       parsed.port = parseInt(argv[i + 1]);
       i++;
-    } else if (argv[i] === '--host' && argv[i + 1]) {
+    } else if (arg === '--host' && argv[i + 1]) {
       parsed.host = argv[i + 1];
       i++;
-    } else if (argv[i] === '--chromadb-url' && argv[i + 1]) {
+    } else if (arg === '--chromadb-url' && argv[i + 1]) {
       parsed.chromadbUrl = argv[i + 1];
       i++;
     }
   }
+
   return parsed;
 }
 
-const cmdArgs = parseArgs(args.slice(1));
+const cmdArgs = parseArgs(args);
+const command = cmdArgs.command;
 
 // Get the package root directory
 const packageRoot = path.join(__dirname, '..');
@@ -58,10 +73,9 @@ const commands = {
     const port = cmdArgs.port || process.env.PORT || 3434;
     const chromadbUrl = cmdArgs.chromadbUrl || process.env.CHROMADB_URL || 'http://localhost:8000';
 
-    console.log('🚀 Starting ChromaDB Admin Dashboard...\n');
-    console.log(`📡 ChromaDB URL: ${chromadbUrl}`);
-    console.log(`🌐 Server Port: ${port}`);
-    console.log(`🔗 Dashboard: http://localhost:${port}\n`);
+    console.log('🚀 Starting ChromaDB Admin Dashboard...');
+    console.log(`📡 Default ChromaDB URL: ${chromadbUrl}`);
+    console.log(`🌐 Server: http://localhost:${port}\n`);
 
     // Check if .env exists
     const envPath = path.join(packageRoot, '.env');
