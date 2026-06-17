@@ -1,3 +1,4 @@
+MANIFEST.in
 README.md
 pyproject.toml
 setup.py
@@ -12,3 +13,10 @@ src/chromadb_admin.egg-info/entry_points.txt
 src/chromadb_admin.egg-info/not-zip-safe
 src/chromadb_admin.egg-info/requires.txt
 src/chromadb_admin.egg-info/top_level.txt
+src/chromadb_admin/static/asset-manifest.json
+src/chromadb_admin/static/index.html
+src/chromadb_admin/static/manifest.json
+src/chromadb_admin/static/vite.svg
+src/chromadb_admin/static/static/css/main.9f2411cc.css
+src/chromadb_admin/static/static/js/main.ee32bede.js
+src/chromadb_admin/static/static/js/main.ee32bede.js.LICENSE.txt

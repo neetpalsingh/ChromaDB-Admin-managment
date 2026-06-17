@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "chromadb-admin"
-version = "1.0.0"
+version = "1.0.7"
 description = "ChromaDB Admin Management System - A web-based admin dashboard for ChromaDB"
 readme = "README.md"
 requires-python = ">=3.8"

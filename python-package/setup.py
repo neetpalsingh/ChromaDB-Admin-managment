@@ -12,7 +12,7 @@ long_description = (this_directory / "README.md").read_text(encoding='utf-8')
 
 setup(
     name='chromadb-admin',
-    version='1.0.0',
+    version='1.0.6',
     author='Neetpal Singh',
     author_email='neetpalsingh750@gmail.com',
     description='ChromaDB Admin Management System - A web-based admin dashboard for ChromaDB vector databases',

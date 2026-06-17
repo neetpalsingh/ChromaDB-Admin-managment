@@ -1,6 +1,6 @@
 {
   "name": "chromadb-admin",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "description": "ChromaDB Admin Management System (CAMS) - A modern web-based admin dashboard for managing ChromaDB vector databases",
   "main": "server/productionServer.js",
   "bin": {
@@ -29,7 +29,14 @@
   "bugs": {
     "url": "https://github.com/neetpalsingh/ChromaDB-Admin-managment/issues"
   },
-  "homepage": "https://github.com/neetpalsingh/ChromaDB-Admin-managment#readme",
+  "homepage": ".",
+  "files": [
+    "build/",
+    "server/",
+    "bin/",
+    ".env.example",
+    "README.md"
+  ],
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=8.0.0"
