@@ -46,21 +46,47 @@ CAMS can be installed in multiple ways. Choose the method that works best for yo
 
 ### 📦 Method 1: NPM Package (Recommended for Node.js projects)
 
+#### Option A: Using npx (No Installation Required)
+
+```bash
+# Start with default settings (recommended)
+npx chromadb-admin
+
+# With custom port
+npx chromadb-admin --port 5000
+
+# With custom ChromaDB URL
+npx chromadb-admin --chromadb-url http://your-chromadb:8000
+
+# With both custom port and URL
+npx chromadb-admin --port 5000 --chromadb-url http://your-chromadb:8000
+```
+
+#### Option B: Global Installation
+
 ```bash
 # Install globally
 npm install -g chromadb-admin
 
-# Or add to your project
-npm install chromadb-admin
-```
-
-**Usage:**
-```bash
-# Start the admin dashboard
+# Then run from anywhere
 chromadb-admin
 
-# With custom ChromaDB URL
-chromadb-admin --chromadb-url http://your-chromadb:8000 --port 3434
+# With options
+chromadb-admin --port 5000 --chromadb-url http://your-chromadb:8000
+```
+
+#### Option C: Project Installation
+
+```bash
+# Add to your project
+npm install chromadb-admin
+
+# Run using npx
+npx chromadb-admin
+
+# Or add to package.json scripts
+# "scripts": { "admin": "chromadb-admin" }
+# Then run: npm run admin
 ```
 
 ### 🐍 Method 2: Python Package (Recommended for Python projects)
@@ -162,6 +188,60 @@ npm run serve:production
 3. **Open your browser**: http://localhost:3434
 
 4. **Start managing** your ChromaDB instance! 🎉
+
+## ⚙️ CLI Options
+
+Both NPM and Python packages support the following command-line options:
+
+### Commands
+
+```bash
+chromadb-admin [command] [options]
+```
+
+| Command | Description |
+|---------|-------------|
+| `start` | Start the production server (default) |
+| `dev` | Start development server (NPM only) |
+| `build` | Build for production (NPM only) |
+| `help` | Show help message |
+| `version` | Show version information |
+
+### Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--port <number>` | Port to run on | `3434` |
+| `--host <address>` | Host address | `0.0.0.0` |
+| `--chromadb-url <url>` | ChromaDB server URL | `http://localhost:8000` |
+
+### Examples
+
+```bash
+# Start with default settings
+npx chromadb-admin
+
+# Custom port
+npx chromadb-admin --port 5000
+
+# Custom ChromaDB URL
+npx chromadb-admin --chromadb-url https://my-chromadb.example.com
+
+# Custom port and ChromaDB URL
+npx chromadb-admin --port 5000 --chromadb-url http://localhost:8000
+
+# Custom host (for Docker/remote access)
+npx chromadb-admin --host 0.0.0.0 --port 3434
+
+# Python version - same options work
+chromadb-admin --port 5000 --chromadb-url http://localhost:8000
+
+# Show help
+npx chromadb-admin help
+
+# Show version
+npx chromadb-admin version
+```
 
 ## Environment Configuration
 
