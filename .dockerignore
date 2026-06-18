@@ -28,8 +28,8 @@ npm-debug.log
 .DS_Store
 Thumbs.db
 
-# Build artifacts (will be rebuilt)
-build/
+# Build artifacts (DO NOT exclude build/ - we need pre-built files!)
+# build/  # <- Commented out so we can copy pre-built files
 dist/
 dist-ssr/
 
