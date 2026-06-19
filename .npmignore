@@ -1,0 +1,47 @@
+# Source files
+src/
+public/
+vite.config.ts
+tsconfig.json
+
+# Development files
+node_modules/
+.env.local
+.env.development
+.env.test
+*.log
+npm-debug.log*
+
+# Build artifacts (we want dist/ in npm package)
+# Don't ignore build/ as it contains the production build
+
+# Testing
+coverage/
+.nyc_output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentation (keep only README)
+PUBLISHING_GUIDE.md
+ENV_CONFIGURATION.md
+PRE_PUBLISH_CHECKLIST.md
+START_HERE.md
+QUICK_PUBLISH_GUIDE.md
+STEP_BY_STEP_PUBLISHING.md
+AUTHENTICATION_COMPLETE.md
+COOKIE_AUTH_IMPLEMENTATION.md
+
+# Git
+.git/
+.gitignore
+
+# Python package
+python-package/
+
+# Misc
+.DS_Store
+Thumbs.db
