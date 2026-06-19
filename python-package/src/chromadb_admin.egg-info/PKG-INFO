@@ -1,0 +1,201 @@
+Metadata-Version: 2.4
+Name: chromadb-admin
+Version: 1.0.0
+Summary: ChromaDB Admin Management System - A web-based admin dashboard for ChromaDB
+Home-page: https://github.com/neetpalsingh/ChromaDB-Admin-managment
+Author: Neetpal Singh
+Author-email: Neetpal Singh <neetpalsingh750@gmail.com>
+Maintainer-email: Neetpal Singh <neetpalsingh750@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/neetpalsingh/ChromaDB-Admin-managment
+Project-URL: Documentation, https://github.com/neetpalsingh/ChromaDB-Admin-managment#readme
+Project-URL: Repository, https://github.com/neetpalsingh/ChromaDB-Admin-managment
+Project-URL: Bug Reports, https://github.com/neetpalsingh/ChromaDB-Admin-managment/issues
+Keywords: chromadb,vector-database,admin,dashboard,management,embeddings,ai,ml
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Database :: Database Engines/Servers
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: chromadb>=0.4.0
+Requires-Dist: fastapi>=0.100.0
+Requires-Dist: uvicorn[standard]>=0.23.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: requests>=2.31.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: flake8>=6.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Dynamic: author
+Dynamic: home-page
+Dynamic: requires-python
+
+# ChromaDB Admin - Python Package
+
+A comprehensive admin dashboard and CLI tool for managing ChromaDB vector databases.
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+pip install chromadb-admin
+```
+
+### Usage
+
+#### CLI Usage
+
+```bash
+# Start with default settings (port 3434)
+chromadb-admin
+
+# Custom port
+chromadb-admin --port 8080
+
+# Custom ChromaDB URL
+chromadb-admin --chromadb-url http://localhost:8000
+
+# Full customization
+chromadb-admin --port 5000 --host 0.0.0.0 --chromadb-url http://chroma:8000
+
+# Enable auto-reload (development)
+chromadb-admin --reload
+```
+
+#### Python API Usage
+
+```python
+from chromadb_admin import start_server
+
+# Start with defaults
+start_server()
+
+# Custom configuration
+start_server(
+    chromadb_url="http://localhost:8000",
+    host="0.0.0.0",
+    port=3434,
+    reload=False
+)
+```
+
+#### Using the Client Library
+
+```python
+from chromadb_admin import ChromaDBAdminClient
+
+# Connect to the admin API
+client = ChromaDBAdminClient("http://localhost:3434")
+
+# Get server health
+health = client.health()
+print(health)
+
+# List collections
+collections = client.list_collections()
+print(collections)
+```
+
+## 📋 Features
+
+- ✅ **Web Dashboard** - Modern React-based UI
+- ✅ **CLI Tool** - Easy command-line interface
+- ✅ **Python API** - Programmatic access
+- ✅ **Collection Management** - Create, view, delete collections
+- ✅ **Document Operations** - Add, query, update, delete documents
+- ✅ **Query Interface** - Advanced similarity search
+- ✅ **Metadata Filtering** - Filter by metadata
+- ✅ **Batch Operations** - Bulk upload and export
+- ✅ **Multi-tenant Support** - Manage multiple databases
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file:
+
+```env
+CHROMADB_URL=http://localhost:8000
+PORT=3434
+HOST=0.0.0.0
+```
+
+### CLI Arguments
+
+```bash
+chromadb-admin --help
+
+Options:
+  --chromadb-url TEXT  ChromaDB server URL (default: http://localhost:8000)
+  --port INTEGER       Server port (default: 3434)
+  --host TEXT          Server host (default: 0.0.0.0)
+  --reload             Enable auto-reload (development)
+  --help               Show this message and exit
+```
+
+## 📦 Installation Methods
+
+### From PyPI (Recommended)
+
+```bash
+pip install chromadb-admin
+```
+
+### From Source
+
+```bash
+git clone https://github.com/neetpalsingh/ChromaDB-Admin-managment.git
+cd ChromaDB-Admin-managment/python-package
+pip install -e .
+```
+
+## 🐳 Docker Alternative
+
+If you prefer Docker:
+
+```bash
+docker pull neetpalsingh/chromadb-admin
+docker run -p 3434:3434 neetpalsingh/chromadb-admin
+```
+
+## 📚 Documentation
+
+- **GitHub Repository:** https://github.com/neetpalsingh/ChromaDB-Admin-managment
+- **Full Documentation:** See repository README
+- **Issues:** https://github.com/neetpalsingh/ChromaDB-Admin-managment/issues
+
+## 🔗 Related Packages
+
+- **NPM Package:** `npm install -g chromadb-admin`
+- **Docker Image:** `neetpalsingh/chromadb-admin`
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 👤 Author
+
+**Neetpal Singh**
+- Email: neetpalsingh750@gmail.com
+- GitHub: [@neetpalsingh](https://github.com/neetpalsingh)
+
+## 🤝 Contributing
+
+Contributions welcome! Please see CONTRIBUTING.md in the repository.
+
+## ⭐ Support
+
+If you find this useful, please star the repository!
+
+https://github.com/neetpalsingh/ChromaDB-Admin-managment

@@ -91,14 +91,14 @@ chromadb-admin --chromadb-url http://localhost:8000
 
 ```bash
 # Pull the image
-docker pull YOUR_USERNAME/chromadb-admin:latest
+docker pull neetpalsingh/chromadb-admin:latest
 
 # Run the container
 docker run -d \
   -p 3434:3434 \
   -e CHROMADB_URL=http://your-chromadb:8000 \
   --name chromadb-admin \
-  YOUR_USERNAME/chromadb-admin:latest
+  neetpalsingh/chromadb-admin:latest
 ```
 
 **Or use docker-compose:**
@@ -107,7 +107,7 @@ docker run -d \
 version: '3.8'
 services:
   chromadb-admin:
-    image: YOUR_USERNAME/chromadb-admin:latest
+    image: neetpalsingh/chromadb-admin:latest
     ports:
       - "3434:3434"
     environment:
@@ -122,8 +122,8 @@ docker-compose up -d
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/chromadb-admin.git
-cd chromadb-admin
+git clone https://github.com/neetpalsingh/ChromaDB-Admin-managment.git
+cd ChromaDB-Admin-managment/api-ui
 
 # Install dependencies
 npm install
@@ -156,7 +156,7 @@ npm run serve:production
    chromadb-admin
 
    # Docker
-   docker run -p 3434:3434 -e CHROMADB_URL=http://localhost:8000 YOUR_USERNAME/chromadb-admin
+   docker run -p 3434:3434 -e CHROMADB_URL=http://localhost:8000 neetpalsingh/chromadb-admin
    ```
 
 3. **Open your browser**: http://localhost:3434

@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+setup.py
+src/chromadb_admin/__init__.py
+src/chromadb_admin/cli.py
+src/chromadb_admin/client.py
+src/chromadb_admin/server.py
+src/chromadb_admin.egg-info/PKG-INFO
+src/chromadb_admin.egg-info/SOURCES.txt
+src/chromadb_admin.egg-info/dependency_links.txt
+src/chromadb_admin.egg-info/entry_points.txt
+src/chromadb_admin.egg-info/not-zip-safe
+src/chromadb_admin.egg-info/requires.txt
+src/chromadb_admin.egg-info/top_level.txt
