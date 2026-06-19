@@ -107,14 +107,15 @@ const DatabaseManagement: React.FC<DatabaseManagementProps> = () => {
           databasesArray = response.data;
         } else if (response.data && typeof response.data === 'object') {
           // Check if it's a single database object
-          if (response.data.name && response.data.tenant) {
-            databasesArray = [response.data];
+          const data = response.data as any;
+          if (data.name && data.tenant) {
+            databasesArray = [data];
           } else {
             // Try to extract databases from nested object
-            if (response.data.databases && Array.isArray(response.data.databases)) {
-              databasesArray = response.data.databases;
-            } else if (response.data.data && Array.isArray(response.data.data)) {
-              databasesArray = response.data.data;
+            if (data.databases && Array.isArray(data.databases)) {
+              databasesArray = data.databases;
+            } else if (data.data && Array.isArray(data.data)) {
+              databasesArray = data.data;
             } else {
               console.error('Unexpected database response format:', response.data);
               setError('Unexpected response format from server');

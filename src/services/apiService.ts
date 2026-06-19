@@ -432,13 +432,14 @@ class APIService {
         databases = response.data;
       } else if (response.data && typeof response.data === 'object') {
         // Handle different possible response structures
-        if (response.data.databases && Array.isArray(response.data.databases)) {
-          databases = response.data.databases;
-        } else if (response.data.data && Array.isArray(response.data.data)) {
-          databases = response.data.data;
-        } else if (response.data.name && response.data.tenant) {
+        const data = response.data as any;
+        if (data.databases && Array.isArray(data.databases)) {
+          databases = data.databases;
+        } else if (data.data && Array.isArray(data.data)) {
+          databases = data.data;
+        } else if (data.name && data.tenant) {
           // Single database object
-          databases = [response.data];
+          databases = [data];
         } else {
           console.warn('Unexpected database response structure:', response.data);
           databases = [];
